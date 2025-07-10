@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Suit Jawa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 40px;
+      background-color: #fdf6e3;
+    }
+    .btn {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    #hasil {
+      margin-top: 30px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✊✌️🖐️ Game Suit Jawa</h1>
+  <p>Pilih salah satu:</p>
+
+  <button class="btn" data-pilihan="batu">🪨 Batu</button>
+  <button class="btn" data-pilihan="gunting">✂️ Gunting</button>
+  <button class="btn" data-pilihan="kertas">📄 Kertas</button>
+
+  <p id="hasil"></p>
+
+  <script>
+    const tombol = document.querySelectorAll(".btn");
+    const hasil = document.getElementById("hasil");
+
+    tombol.forEach(btn => {
+      btn.addEventListener("click", function () {
+        const pilihanUser = btn.dataset.pilihan;
+        const pilihanKomputer = getPilihanKomputer();
+        const pemenang = tentukanPemenang(pilihanUser, pilihanKomputer);
+
+        hasil.textContent = `Kamu pilih ${pilihanUser} - Komputer pilih ${pilihanKomputer} → ${pemenang}`;
+      });
+    });
+
+    function getPilihanKomputer() {
+      const pilihan = ["batu", "gunting", "kertas"];
+      return pilihan[Math.floor(Math.random() * 3)];
+    }
+
+    function tentukanPemenang(user, komputer) {
+      if (user === komputer) return "Seri!";
+      if (
+        (user === "batu" && komputer === "gunting") ||
+        (user === "gunting" && komputer === "kertas") ||
+        (user === "kertas" && komputer === "batu")
+      ) {
+        return "Kamu Menang! 🎉";
+      } else {
+        return "Komputer Menang! 😢";
+      }
+    }
+  </script>
+
+</body>
+</html>
